@@ -22,18 +22,37 @@ const cartSlice = createSlice({
     name: 'cart', //unique name for identify redux
     initialState: INITIAL_STATE,
     reducers: {
-        addToCart: (state,action) => {
-           
+        addToCart: (state, action) => {
+            const itemExists = state.cartList.find((item) => item.id === action.payload.id);
+            if (itemExists) {
+                // count 1 -logic
+                state.cartList.forEach((item) => {
+                    if (item?.id === action.payload.id) {
+                        item.count = 1;
+                    }
+                })
+                return;
+            }
             state.cartList.push({
-            ...action.payload,
-            count:1
+                ...action.payload,
+                count: 1,
+            });
+
+        },
+        increment: (state, action) => {
+            const productID = action.payload;
+            state.cartList.forEach((item) => {
+                if (item?.id === productID) {
+                    item.count++;
+                }
             })
         },
-        increment: (state) => {
-            state.cartCount += 1
-        },
-        decrement: (state) => {
-            state.cartCount -= 1
+        decrement: (state, action) => {
+            const productID = action.payload;
+            state.cartList.forEach((item) => {
+               item?.id === productID && item.count--;
+                
+            })
         },
     }
 });
