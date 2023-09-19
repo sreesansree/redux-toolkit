@@ -1,9 +1,16 @@
 import React from 'react';
 import './CartButton.css'
-const BeforeCart = ({addToCart}) => {
+
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../redux/cart';
+
+const BeforeCart = ({product}) => {
+
+  const dispatch = useDispatch();
+
   return (
     <div className='before-cart'>
-      <button className='add-cart-button' onClick={addToCart}>Add to cart</button>
+      <button className='add-cart-button' onClick={()=>dispatch(addToCart(product))}>Add to cart</button>
     </div>
   );
 }
