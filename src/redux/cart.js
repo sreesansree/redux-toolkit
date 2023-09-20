@@ -11,17 +11,29 @@
 // Action = Button Click
 // Reducer =(inject to)> React 
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+
+
+
+
+
+
 
 const INITIAL_STATE = { // created state
     cartList: [],
     cartCount: 0,
+    userDetail: [],
 }
 
 const cartSlice = createSlice({
     name: 'cart', //unique name for identify redux
     initialState: INITIAL_STATE,
     reducers: {
+        updateUser: (state, action) => {
+            state.userDetail.push(action.payload)
+
+        },
         addToCart: (state, action) => {
             const itemExists = state.cartList.find((item) => item.id === action.payload.id);
             if (itemExists) {
@@ -50,13 +62,14 @@ const cartSlice = createSlice({
         decrement: (state, action) => {
             const productID = action.payload;
             state.cartList.forEach((item) => {
-               item?.id === productID && item.count--;
-                
+                item?.id === productID && item.count--;
+
             })
         },
-    }
+    },
+
 });
 
-export const { increment, decrement, addToCart } = cartSlice.actions; // exported actions
+export const { increment, decrement, addToCart,updateUser } = cartSlice.actions; // exported actions
 
 export default cartSlice.reducer; // exported reducer
