@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <header>
             <div className="container">
-                <h1>Puthumana</h1>
+                <h1>PUTHUMANA</h1>
                 <div className='right-section'>
                     <div className='cart-count-header'>{totalCartCount}</div>
                     {/* <div className='cart-count-header'>{cartList?.length}</div> */}
